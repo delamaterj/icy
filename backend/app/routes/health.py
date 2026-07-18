@@ -10,7 +10,7 @@ def health():
     return jsonify(
         {
             "status": "healthy",
-            "service": "ISEAP Backend",
+            "service": "ICY Backend",
             "version": "0.1.0",
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
