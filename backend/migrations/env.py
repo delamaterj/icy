@@ -7,7 +7,7 @@ from alembic import context
 
 from app import create_app
 from app.extensions import db
-from app.models.dataset import Dataset
+from backend.app.models.dataset import Dataset
 
 app = create_app()
 
