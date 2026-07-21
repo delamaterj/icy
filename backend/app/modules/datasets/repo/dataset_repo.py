@@ -18,3 +18,8 @@ class DatasetRepository:
             Dataset,
             dataset_id
         )
+    
+    def get_by_checksum(self, checksum):
+        return Dataset.query.filter_by(
+            checksum=checksum
+        ).first()
