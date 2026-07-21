@@ -41,3 +41,39 @@ class DatasetService:
             "filename": saved_dataset.original_filename,
             "status": saved_dataset.status.value
         }
+
+    def get_all_datasets(self):
+
+        datasets = self.dataset_repository.get_all()
+
+        return [
+            self.serialize_dataset(dataset)
+            for dataset in datasets
+        ]
+    
+    def get_dataset_by_id(self, dataset_id):
+
+        dataset = self.dataset_repository.get_by_id(
+            dataset_id
+        )
+
+        if dataset is None:
+            return None
+
+        return self.serialize_dataset(dataset)
+
+
+    def serialize_dataset(self, dataset):
+
+        return {
+            "id": str(dataset.id),
+            "original_filename": dataset.original_filename,
+            "stored_filename": dataset.stored_filename,
+            "file_type": dataset.file_type.value,
+            "file_size_bytes": dataset.file_size_bytes,
+            "checksum": dataset.checksum,
+            "row_count": dataset.row_count,
+            "column_count": dataset.column_count,
+            "status": dataset.status.value,
+            "uploaded_at": dataset.uploaded_at.isoformat()
+        }

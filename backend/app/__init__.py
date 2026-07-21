@@ -13,6 +13,7 @@ def create_app() -> Flask:
     cors.init_app(app)
 
     app.register_blueprint(health_bp)
+
     app.register_blueprint(dataset_bp)
 
     db.init_app(app)
