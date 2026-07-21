@@ -1,6 +1,5 @@
 from flask import jsonify, request
 from app.modules.datasets.services.dataset_service import DatasetService
-import os
 
 dataset_service = DatasetService()
 

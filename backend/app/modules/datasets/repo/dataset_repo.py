@@ -1,5 +1,11 @@
+from app.extensions import db
+
+
 class DatasetRepository:
 
-    def upload(self):
+    def create(self, dataset):
 
-        return True
+        db.session.add(dataset)
+        db.session.commit()
+
+        return dataset
