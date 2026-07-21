@@ -37,8 +37,8 @@ class Dataset(db.Model):
     checksum: Mapped[str] = mapped_column(
         String(64),
         nullable=False,
-        index=True
-    )
+        unique=True
+    )   
     file_type: Mapped[FileType] = mapped_column(
         SQLEnum(FileType),
         nullable=False

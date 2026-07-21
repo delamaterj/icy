@@ -17,6 +17,14 @@ class DatasetService:
 
         checksum = ChecksumGenerator.generate(stored_file["file_path"])
 
+        existing_dataset = (
+            self.dataset_repository
+            .get_by_checksum(checksum)
+        )
+
+        if existing_dataset:
+            raise ValueError("Dataset already exists.")
+
         metadata = DatasetParser.extract_metadata(stored_file["file_path"])
 
         dataset = Dataset(
