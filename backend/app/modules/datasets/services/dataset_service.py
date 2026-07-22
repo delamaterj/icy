@@ -55,7 +55,7 @@ class DatasetService:
         datasets = self.dataset_repository.get_all()
 
         return [
-            self.serialize_dataset(dataset)
+            self.serialize_summary(dataset)
             for dataset in datasets
         ]
     
@@ -83,5 +83,16 @@ class DatasetService:
             "row_count": dataset.row_count,
             "column_count": dataset.column_count,
             "status": dataset.status.value,
+            "uploaded_at": dataset.uploaded_at.isoformat()
+        }
+
+    def serialize_summary(self, dataset):
+
+        return {
+            "id": str(dataset.id),
+            "original_filename": dataset.original_filename,
+            "status": dataset.status.value,
+            "row_count": dataset.row_count,
+            "column_count": dataset.column_count,
             "uploaded_at": dataset.uploaded_at.isoformat()
         }

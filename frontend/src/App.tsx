@@ -1,9 +1,7 @@
-import HealthPage from "./pages/HealthPage";
+import AppRouter from "./router/AppRouter";
 
 function App() {
-
-    return <HealthPage />;
-
+    return <AppRouter />;
 }
 
 export default App;
