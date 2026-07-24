@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from app.controllers.health_controllers import get_health
+from app.modules.health.controllers.health_controllers import get_health
 
 health_bp = Blueprint("health", __name__)
 

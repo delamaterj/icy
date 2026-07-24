@@ -1,6 +1,6 @@
 from flask import jsonify
 
-from app.services.health_services import HealthService
+from app.modules.health.services.health_services import HealthService
 
 health_service = HealthService()
 
