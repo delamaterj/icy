@@ -1,6 +1,7 @@
 import os
 import uuid
 from flask import current_app
+from app.common.exceptions import StorageException
 
 
 class FileStorage:
@@ -8,22 +9,25 @@ class FileStorage:
     @staticmethod
     def save(file):
 
-        extension = os.path.splitext(file.filename)[1]
+        try:
+            extension = os.path.splitext(file.filename)[1]
 
-        stored_filename = (
-            f"{uuid.uuid4()}{extension}"
-        )
+            stored_filename = (
+                f"{uuid.uuid4()}{extension}"
+            )
 
-        upload_folder = current_app.config["UPLOAD_FOLDER"]
+            upload_folder = current_app.config["UPLOAD_FOLDER"]
 
-        file_path = os.path.join(
-            upload_folder,
-            stored_filename
-        )
+            file_path = os.path.join(
+                upload_folder,
+                stored_filename
+            )
 
-        file.save(file_path)
+            file.save(file_path)
 
-        return {
-            "stored_filename": stored_filename,
-            "file_path": file_path
-        }
+            return {
+                "stored_filename": stored_filename,
+                "file_path": file_path
+            }
+        except OSError:
+            raise StorageException("Unable to save uploaded file.")
