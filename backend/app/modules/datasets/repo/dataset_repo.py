@@ -23,3 +23,7 @@ class DatasetRepository:
         return Dataset.query.filter_by(
             checksum=checksum
         ).first()
+
+    def update(self, dataset):
+        db.session.commit()
+        return dataset

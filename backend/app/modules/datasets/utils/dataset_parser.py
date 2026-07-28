@@ -10,5 +10,9 @@ class DatasetParser:
 
         return {
             "row_count": len(dataframe),
-            "column_count": len(dataframe.columns)
+            "column_count": len(dataframe.columns),
+            "columns": [
+                column.strip()
+                for column in dataframe.columns
+            ]
         }

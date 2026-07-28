@@ -3,13 +3,15 @@ from app.modules.datasets.utils.checksum import ChecksumGenerator
 from app.modules.datasets.utils.dataset_parser import DatasetParser
 from app.modules.datasets.repo.dataset_repo import DatasetRepository
 from app.enums.dataset_status import DatasetStatus
+from app.enums.file_type import FileType
 from app.models.dataset import Dataset
-
+from app.modules.validators.dataset_validator import DatasetValidator
 
 class DatasetService:
 
     def __init__(self):
         self.dataset_repository = DatasetRepository()
+        self.dataset_validator = DatasetValidator()
 
     def upload_dataset(self, file):
 
@@ -33,21 +35,33 @@ class DatasetService:
             file_path=stored_file["file_path"],
             file_size_bytes=file.content_length,
             checksum=checksum,
-            file_type="CSV",
+            file_type=FileType.CSV,
             row_count=metadata["row_count"],
             column_count=metadata["column_count"],
-            status=DatasetStatus.READY
+            status=DatasetStatus.UPLOADED
         )
 
-        saved_dataset = self.dataset_repository.create(
-            dataset
+        saved_dataset = self.dataset_repository.create(dataset)
+        saved_dataset.status = DatasetStatus.VALIDATING
+        self.dataset_repository.update(saved_dataset)
+
+        validation = self.dataset_validator.validate_dataset(
+            saved_dataset,
+            metadata
         )
+
+        if validation.passed:
+            saved_dataset.status = DatasetStatus.READY
+        else:
+            saved_dataset.status = DatasetStatus.FAILED
+
+        self.dataset_repository.update(saved_dataset)
 
         return {
-            "message": "Dataset uploaded successfully.",
             "dataset_id": str(saved_dataset.id),
-            "filename": saved_dataset.original_filename,
-            "status": saved_dataset.status.value
+            "status": saved_dataset.status.value,
+            "errors": validation.errors,
+            "passed": validation.passed
         }
 
     def get_all_datasets(self):
