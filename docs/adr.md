@@ -198,3 +198,16 @@ Any preprocessing change affects both workflows simultaneously.
 
 Easier to version and test.
 
+
+Dataset Storage vs Training Compatibility
+
+Decision:
+
+Datasets are stored independently of model compatibility. Unsupported training formats result in validation failure, not upload rejection.
+
+Reasoning:
+
+preserves uploaded artifacts
+allows future ML pipelines to support additional formats
+separates data management from experiment requirements
+

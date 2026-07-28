@@ -32,7 +32,7 @@ class DatasetValidator:
             FileType.CSV
         }
         if file_type not in supported:
-            result.add_error(f"Unsupported dataset type: {file_type.value}")
+            result.add_error(f"Dataset type: {file_type.value} is currently not supported for training")
 
     def _validate_not_empty(
         self,
