@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 from app.enums.file_type import FileType
-from app.modules.validators.validation_result import ValidationResult
+from app.modules.datasets.validators.validation_result import ValidationResult
 
 
 class DatasetValidator:
@@ -29,12 +29,10 @@ class DatasetValidator:
         result: ValidationResult
     ):
         supported = {
-            FileType.CSV,
-            FileType.JSON,
-            FileType.PARQUET
+            FileType.CSV
         }
         if file_type not in supported:
-            result.add_error(f"Unsupported dataset type: {file_type.value}")
+            result.add_error(f"Dataset type: {file_type.value} is currently not supported for training")
 
     def _validate_not_empty(
         self,
