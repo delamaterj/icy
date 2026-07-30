@@ -12,4 +12,5 @@ export interface DatasetDetails extends DatasetSummary {
     checksum: string;
     file_type: string;
     file_size_bytes: number;
+    version: number;
 }

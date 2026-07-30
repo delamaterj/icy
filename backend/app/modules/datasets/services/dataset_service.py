@@ -110,7 +110,8 @@ class DatasetService:
             "row_count": dataset.row_count,
             "column_count": dataset.column_count,
             "status": dataset.status.value,
-            "uploaded_at": dataset.uploaded_at.isoformat()
+            "uploaded_at": dataset.uploaded_at.isoformat(),
+            "version": dataset.version
         }
 
     def serialize_summary(self, dataset):
