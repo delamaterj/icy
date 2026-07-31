@@ -15,7 +15,7 @@ export interface DatasetDetails extends DatasetSummary {
     version: number;
 }
 
-export interface UploadDataserResponse {
+export interface UploadDatasetResponse {
     dataset_id: string;
     status: string;
     errors: string[];
