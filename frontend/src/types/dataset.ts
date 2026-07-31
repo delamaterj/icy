@@ -12,4 +12,12 @@ export interface DatasetDetails extends DatasetSummary {
     checksum: string;
     file_type: string;
     file_size_bytes: number;
+    version: number;
+}
+
+export interface UploadDatasetResponse {
+    dataset_id: string;
+    status: string;
+    errors: string[];
+    passed: boolean;
 }

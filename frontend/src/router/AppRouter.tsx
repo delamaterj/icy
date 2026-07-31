@@ -7,6 +7,8 @@ import {
 
 import HealthPage from "../pages/HealthPage";
 import DatasetsPage from "../pages/DatasetPage";
+import DatasetDetailsPage from "../pages/DatasetDetailsPage";
+import UploadDatasetPage from "../pages/UploadDatasetPage";
 
 export default function AppRouter() {
     return (
@@ -24,8 +26,18 @@ export default function AppRouter() {
                 />
 
                 <Route
+                    path="/datasets/upload"
+                    element={<UploadDatasetPage />}
+                />
+
+                <Route
                     path="/datasets"
                     element={<DatasetsPage />}
+                />
+
+                <Route
+                    path="/datasets/:id"
+                    element={<DatasetDetailsPage />}
                 />
 
             </Routes>
