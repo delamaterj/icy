@@ -14,3 +14,10 @@ export interface DatasetDetails extends DatasetSummary {
     file_size_bytes: number;
     version: number;
 }
+
+export interface UploadDataserResponse {
+    dataset_id: string;
+    status: string;
+    errors: string[];
+    passed: boolean;
+}
