@@ -11,10 +11,16 @@ export async function apiFetch<T>(
         `${API_BASE_URL}${endpoint}`,
         options
     );
-    
+
+    const data = await response.json();
+
     if (!response.ok) {
-        throw new Error(`Request failed (${response.status})`);
+
+        throw new Error(
+            data.error ??
+            `Request failed (${response.status})`
+        );
     }
 
-    return response.json();
+    return data;
 }

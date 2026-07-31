@@ -28,11 +28,13 @@ export function useUploadDataset() {
 
             return response;
 
-        } catch {
+        } catch (err) {
 
-            setError("Unable to load dataset.");
-
-            return null;
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Unable to upload dataset.");
+            }
 
         } finally {
 

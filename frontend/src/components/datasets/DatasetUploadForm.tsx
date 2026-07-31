@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useUploadDataset } from "../../hooks/useUploadDataset";
+import UploadResult from "./UploadResult";
 
 
 export default function DatasetUploadForm() {
@@ -56,8 +57,10 @@ export default function DatasetUploadForm() {
                         : "Upload"
                 }
             </button>
-            {error && <p>{error}</p>}
-            {result && <>{result}</>}
+            <UploadResult
+                result={result}
+                error={error}
+            />
         </>
     );
 }
