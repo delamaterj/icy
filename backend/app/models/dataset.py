@@ -2,6 +2,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy import UUID, DateTime, Integer, String, BigInteger, Enum as SQLEnum
+from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Mapped, mapped_column
 from app.extensions import db
 from app.enums.dataset_status import DatasetStatus
@@ -70,3 +71,8 @@ class Dataset(db.Model):
         nullable=False,
         default=lambda: datetime.now(timezone.utc)
     )
+
+    experiments = relationship(
+    "Experiment",
+    back_populates="dataset"
+)
