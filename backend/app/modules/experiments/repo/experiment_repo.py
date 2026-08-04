@@ -11,3 +11,11 @@ class ExperimentRepository:
         db.session.refresh(experiment)
 
         return experiment
+
+    def get_all(self):
+
+        return Experiment.query.all()
+
+    def get_by_id(self, id):
+
+        return Experiment.query.get(id)
