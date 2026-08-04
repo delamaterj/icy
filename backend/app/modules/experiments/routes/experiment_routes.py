@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.modules.experiments.controllers.experiment_controller import create_experiment_controller
+from app.modules.experiments.controllers.experiment_controller import create_experiment_controller, get_experiment_controller, get_experiments_controller
 
 experiment_bp = Blueprint(
     "experiments", 
@@ -9,4 +9,12 @@ experiment_bp = Blueprint(
 @experiment_bp.post("/upload")
 def upload():
     return create_experiment_controller()
+
+@experiment_bp.get("/")
+def get_all_experiments():
+    return get_experiments_controller()
+
+@experiment_bp.get("/<uuid:experiment_id>")
+def get_one(experiment_id):
+    return get_experiment_controller(experiment_id)
 

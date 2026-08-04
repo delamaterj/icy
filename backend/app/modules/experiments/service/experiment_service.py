@@ -60,3 +60,46 @@ class ExperimentService:
         except Exception as e:
             print(e)
             raise AppException("Could not upload experiment.")
+
+    def get_all_experiments(self):
+        try:
+            experiments = self.experiment_repository.get_all()
+            return [
+                self.serialize_summary(experiment)
+                for experiment in experiments
+            ]
+        except Exception:
+            raise AppException("Could not get experiments.")
+
+    def get_experiment_by_id(self, experiment_id):
+            try:
+                experiment = self.experiment_repository.get_by_id(
+                    experiment_id
+                )
+    
+                if experiment is None:
+                    return None
+    
+                return {
+                    "id": str(experiment.id),
+                    "name": experiment.name,
+                    "dataset_id": str(experiment.dataset_id),
+                    "description": experiment.description,
+                    "status": experiment.status.value,
+                    "created at": experiment.created_at,
+                    "started at": experiment.started_at,
+                    "completed at": experiment.completed_at
+                }
+            
+            except Exception as e:
+                print(e)
+                raise AppException(f"Could not get experiment {experiment_id}.")
+
+    def serialize_summary(self, experiment):
+    
+            return {
+                "id": str(experiment.id),
+                "name": experiment.name,
+                "dataset_id": experiment.dataset_id,
+                "status": experiment.status.value
+            }
