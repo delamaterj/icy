@@ -1,4 +1,5 @@
 import type { ExperimentSummary } from "../../types/experiment";
+import { Link } from "react-router-dom";
 
 interface Props {
     experiments: ExperimentSummary[];
@@ -21,7 +22,9 @@ export default function ExperimentTable({experiments}: Props) {
                     experiments.map((experiment) => (
                         <tr key={experiment.id}>
                             <td>
-                                {experiment.name}
+                                <Link to={`/experiments/${experiment.id}`}>
+                                    {experiment.name}
+                                </Link>
                             </td>
                             <td>
                                 {experiment.dataset_id}
