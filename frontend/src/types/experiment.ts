@@ -1,7 +1,7 @@
 export interface ExperimentSummary {
     id: string;
-    name: string;
     dataset_id: string;
+    name: string;
     status: string;
 }
 

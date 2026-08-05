@@ -11,6 +11,7 @@ import DatasetDetailsPage from "../pages/DatasetDetailsPage";
 import UploadDatasetPage from "../pages/UploadDatasetPage";
 import ExperimentsPage from "../pages/ExperimentPage";
 import ExperimentDetailsPage from "../pages/ExperimentDetailsPage";
+import CreateExperimentPage from "../pages/CreateExperimentPage";
 
 export default function AppRouter() {
     return (
@@ -50,6 +51,11 @@ export default function AppRouter() {
                 <Route
                     path="/experiments/:id"
                     element={<ExperimentDetailsPage />}
+                />
+
+                <Route
+                    path="/experiments/create"
+                    element={<CreateExperimentPage />}
                 />
 
             </Routes>
