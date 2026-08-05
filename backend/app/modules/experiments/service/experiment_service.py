@@ -86,9 +86,9 @@ class ExperimentService:
                     "dataset_id": str(experiment.dataset_id),
                     "description": experiment.description,
                     "status": experiment.status.value,
-                    "created at": experiment.created_at,
-                    "started at": experiment.started_at,
-                    "completed at": experiment.completed_at
+                    "created_at": experiment.created_at,
+                    "started_at": experiment.started_at,
+                    "completed_at": experiment.completed_at
                 }
             
             except Exception as e:
