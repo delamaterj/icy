@@ -6,11 +6,11 @@ experiment_bp = Blueprint(
     __name__,
     url_prefix="/experiments")
 
-@experiment_bp.post("/upload")
+@experiment_bp.post("")
 def upload():
     return create_experiment_controller()
 
-@experiment_bp.get("/")
+@experiment_bp.get("")
 def get_all_experiments():
     return get_experiments_controller()
 
