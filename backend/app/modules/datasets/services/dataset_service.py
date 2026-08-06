@@ -22,6 +22,8 @@ class DatasetService:
             if not file_type:
                 raise ValidationException([f"Unsupported file type."])
 
+            stored_file = FileStorage.save(file)
+
             checksum = ChecksumGenerator.generate(stored_file["file_path"])
 
             existing_dataset = (
@@ -30,9 +32,8 @@ class DatasetService:
             )
 
             if existing_dataset:
-                raise DuplicateDatasetException("Dataset already exists.")
-
-            stored_file = FileStorage.save(file)
+                FileStorage.delete(stored_file["file_path"])
+                raise DuplicateDatasetException()
 
             metadata = DatasetParser.extract_metadata(stored_file["file_path"])
 
