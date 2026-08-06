@@ -39,6 +39,7 @@ export default function ExperimentForm({
                 onChange={(e) =>
                     setDatasetId(e.target.value)
                 }
+                required
             />
             <label>
                 Experiment Name
@@ -48,6 +49,7 @@ export default function ExperimentForm({
                 onChange={(e) =>
                     setName(e.target.value)
                 }
+                required
             />
             <label>
                 Description
