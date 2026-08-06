@@ -1,7 +1,7 @@
 import os
 
 from app.enums.file_type import FileType
-from app.common.exceptions import ValidationException
+from app.common.exceptions import AppException
 
 
 class FileTypeDetector:
@@ -18,8 +18,6 @@ class FileTypeDetector:
         extension = os.path.splitext(filename)[1].lower()
 
         if extension not in FileTypeDetector.EXTENSION_MAP:
-            raise ValidationException(
-                f"Unsupported file extension: {extension}"
-            )
+            return None
 
         return FileTypeDetector.EXTENSION_MAP[extension]
