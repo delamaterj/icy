@@ -2,17 +2,19 @@ import { useState } from "react";
 import type { CreateExperimentRequest } from "../../types/experiment";
 
 interface Props {
+    initialDatasetId : string
     onSubmit:
     (data: CreateExperimentRequest) => void;
     loading: boolean;
 }
 
 export default function ExperimentForm({
+    initialDatasetId,
     onSubmit,
     loading
 }: Props) {
 
-    const [datasetId, setDatasetId] = useState("");
+    const [datasetId, setDatasetId] = useState(initialDatasetId);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
 

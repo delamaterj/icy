@@ -1,4 +1,5 @@
 import type { ExperimentDetails as ExperimentDetailsType } from "../../types/experiment";
+import { Link } from "react-router-dom";
 
 interface Props {
     experiment: ExperimentDetailsType;
@@ -12,7 +13,7 @@ export default function ExperimentDetails({experiment}: Props) {
                 {experiment.name}
             </h2>
             <p>
-                Dataset ID: {experiment.dataset_id}
+                <Link to={`/datasets/${experiment.dataset_id}`}>Dataset</Link>
             </p>
             <p>
                 Status: {experiment.status}

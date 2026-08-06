@@ -54,7 +54,7 @@ export default function AppRouter() {
                 />
 
                 <Route
-                    path="/experiments/create"
+                    path="/experiments/create/:dataset_id"
                     element={<CreateExperimentPage />}
                 />
 
