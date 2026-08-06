@@ -4,26 +4,18 @@ import type { UploadDatasetResponse } from "../types/dataset";
 
 export function useUploadDataset() {
 
-    const [result, setResult] =
-        useState<UploadDatasetResponse | null>();
-
-    const [loading, setLoading] =
-        useState(false);
-
-    const [error, setError] =
-        useState<string | null>(null);
+    const [result, setResult] = useState<UploadDatasetResponse | null>();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     async function upload(file: File) {
 
         try {
 
             setLoading(true);
-
             setError(null);
 
-            const response =
-                await uploadDataset(file);
-
+            const response = await uploadDataset(file);
             setResult(response);
 
             return response;
@@ -33,13 +25,11 @@ export function useUploadDataset() {
             if (err instanceof Error) {
                 setError(err.message);
             } else {
-                setError("Unable to upload dataset.");
+                setError("Unable to upload dataset. Please try again later");
             }
 
         } finally {
-
             setLoading(false);
-
         }
     }
     

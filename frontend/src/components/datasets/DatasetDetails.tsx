@@ -1,4 +1,5 @@
 import type { DatasetDetails } from "../../types/dataset";
+import { Link } from "react-router-dom";
 
 interface DatasetDetailsProps {
     dataset: DatasetDetails;
@@ -59,6 +60,8 @@ DatasetDetailsProps) {
                 <strong>Uploaded:</strong>{" "}
                 {dataset.uploaded_at}
             </p>
+
+            {dataset.status === "READY" && <Link to={`/experiments/create/${dataset.id}`}>Create experiment from this dataset</Link>}
         </>
     );
 }

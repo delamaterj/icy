@@ -2,17 +2,19 @@ import { useState } from "react";
 import type { CreateExperimentRequest } from "../../types/experiment";
 
 interface Props {
+    initialDatasetId : string
     onSubmit:
     (data: CreateExperimentRequest) => void;
     loading: boolean;
 }
 
 export default function ExperimentForm({
+    initialDatasetId,
     onSubmit,
     loading
 }: Props) {
 
-    const [datasetId, setDatasetId] = useState("");
+    const [datasetId, setDatasetId] = useState(initialDatasetId);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
 
@@ -39,6 +41,7 @@ export default function ExperimentForm({
                 onChange={(e) =>
                     setDatasetId(e.target.value)
                 }
+                required
             />
             <label>
                 Experiment Name
@@ -48,6 +51,7 @@ export default function ExperimentForm({
                 onChange={(e) =>
                     setName(e.target.value)
                 }
+                required
             />
             <label>
                 Description

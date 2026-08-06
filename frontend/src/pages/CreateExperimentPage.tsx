@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ExperimentForm from "../components/experiments/ExperimentForm";
 import { useCreateExperiment } from "../hooks/useCreateExperiment";
 import type { CreateExperimentRequest } from "../types/experiment";
 
 export default function CreateExperimentPage() {
+
+    const { dataset_id } = useParams();
 
     const {
         createExperiment,
@@ -32,6 +34,7 @@ export default function CreateExperimentPage() {
                 <p>{error}</p>
             }
             <ExperimentForm
+                initialDatasetId={dataset_id ?? ""}
                 onSubmit={handleCreate}
                 loading={loading}
             />

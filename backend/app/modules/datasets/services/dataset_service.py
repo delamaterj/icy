@@ -5,7 +5,7 @@ from app.modules.datasets.repo.dataset_repo import DatasetRepository
 from app.enums.dataset_status import DatasetStatus
 from app.models.dataset import Dataset
 from app.modules.datasets.validators.dataset_validator import DatasetValidator
-from app.common.exceptions import DuplicateDatasetException, AppException
+from app.common.exceptions import DuplicateDatasetException, AppException, ValidationException
 from app.modules.datasets.utils.file_type_detector import FileTypeDetector
 
 class DatasetService:
@@ -16,9 +16,13 @@ class DatasetService:
 
     def upload_dataset(self, file):
         try:
-            stored_file = FileStorage.save(file)
 
             file_type = FileTypeDetector.detect(file.filename)
+
+            if not file_type:
+                raise ValidationException([f"Unsupported file type."])
+
+            stored_file = FileStorage.save(file)
 
             checksum = ChecksumGenerator.generate(stored_file["file_path"])
 
@@ -28,7 +32,8 @@ class DatasetService:
             )
 
             if existing_dataset:
-                raise DuplicateDatasetException("Dataset already exists.")
+                FileStorage.delete(stored_file["file_path"])
+                raise DuplicateDatasetException()
 
             metadata = DatasetParser.extract_metadata(stored_file["file_path"])
 
