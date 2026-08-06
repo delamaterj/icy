@@ -16,10 +16,12 @@ export async function apiFetch<T>(
 
     if (!response.ok) {
 
-        throw new Error(
-            data.error ??
-            `Request failed (${response.status})`
-        );
+        const message =
+        data.errors?.join("\n")
+        ?? data.message
+        ?? `Request failed (${response.status})`;
+
+        throw new Error(message);
     }
 
     return data;
