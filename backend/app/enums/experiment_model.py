@@ -1,0 +1,6 @@
+from enum import Enum
+
+class ExperimentModel(Enum):
+    LOGISTIC_REGRESSION = "LOGISTIC_REGRESSION"
+    DECISION_TREE = "DECISION_TREE"
+    RANDOM_FOREST = "RANDOM_FOREST"
