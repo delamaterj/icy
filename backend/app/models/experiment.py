@@ -1,11 +1,12 @@
 from __future__ import annotations
 import uuid
 from datetime import datetime
-from sqlalchemy import UUID, DateTime, String, Enum as SQLEnum, ForeignKey, Text
+from sqlalchemy import UUID, DateTime, String, Enum as SQLEnum, ForeignKey, Text, Float, Integer
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Mapped, mapped_column
 from app.extensions import db
 from app.enums.experiment_status import ExperimentStatus
+from app.enums.experiment_model import ExperimentModel
 
 class Experiment(db.Model):
 
@@ -45,14 +46,26 @@ class Experiment(db.Model):
         nullable=False
     )
 
-    started_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True),
-        nullable=True
+    model: Mapped[ExperimentModel] = mapped_column(
+        SQLEnum(ExperimentModel),
+        nullable=False
     )
 
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True),
-        nullable=True
+    target_column: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False
+    )
+
+    test_size: Mapped[float] = mapped_column(
+        Float,
+        nullable=False,
+        default=0.20
+    )
+
+    random_seed: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=42
     )
 
     dataset = relationship(
