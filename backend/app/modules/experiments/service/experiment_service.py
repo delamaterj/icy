@@ -96,10 +96,12 @@ class ExperimentService:
                     "name": experiment.name,
                     "dataset_id": str(experiment.dataset_id),
                     "description": experiment.description,
+                    "model": experiment.model.value,
                     "status": experiment.status.value,
                     "created_at": experiment.created_at,
-                    "started_at": experiment.started_at,
-                    "completed_at": experiment.completed_at
+                    "target_column": experiment.target_column,
+                    "test_size": experiment.test_size,
+                    "random_seed": experiment.random_seed,
                 }
             
             except Exception as e:
@@ -111,6 +113,8 @@ class ExperimentService:
             return {
                 "id": str(experiment.id),
                 "name": experiment.name,
+                "model": experiment.model.value,
                 "dataset_id": experiment.dataset_id,
-                "status": experiment.status.value
+                "status": experiment.status.value,
+                "created_at": experiment.created_at
             }
