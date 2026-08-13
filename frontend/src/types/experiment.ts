@@ -1,3 +1,8 @@
+export type ExperimentModel = 
+| "LOGISTIC_REGRESSION" 
+| "DECISION_TREE" 
+| "RANDOM_FOREST";
+
 export interface ExperimentSummary {
     id: string;
     dataset_id: string;
@@ -9,15 +14,17 @@ export interface ExperimentSummary {
 
 export interface ExperimentDetails extends ExperimentSummary {
     description: string | null;
-    status: string;
-    created_at: string;
     target_column: string;
-    test_size: Float32Array;
-    random_seed: BigInteger;
+    test_size: number;
+    random_seed: number;
 }
 
 export interface CreateExperimentRequest {
     dataset_id: string;
     name: string;
     description?: string;
+    model: ExperimentModel;
+    target_column: string;
+    test_size?: number;
+    random_seed?: number;
 }
