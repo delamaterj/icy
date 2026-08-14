@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CreateExperimentRequest } from "../../types/experiment";
+import type { CreateExperimentRequest, ExperimentModel } from "../../types/experiment";
 
 interface Props {
     initialDatasetId : string
@@ -7,6 +7,24 @@ interface Props {
     (data: CreateExperimentRequest) => void;
     loading: boolean;
 }
+
+const models: {
+    value: ExperimentModel;
+    label: string;
+}[] = [
+    {
+        value: "LOGISTIC_REGRESSION",
+        label: "Logistic Regression"
+    },
+    {
+        value: "DECISION_TREE",
+        label: "Decision Tree"
+    },
+    {
+        value: "RANDOM_FOREST",
+        label: "Random Forest"
+    }
+];
 
 export default function ExperimentForm({
     initialDatasetId,
@@ -17,6 +35,10 @@ export default function ExperimentForm({
     const [datasetId, setDatasetId] = useState(initialDatasetId);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [model, setModel] = useState<ExperimentModel>("RANDOM_FOREST");
+    const [targetColumn, setTargetColumn] = useState("");
+    const [testSize, setTestSize] = useState(0.20);
+    const [randomSeed, setRandomSeed] = useState(42);
 
     function handleSubmit(
         event: React.FormEvent
@@ -26,8 +48,11 @@ export default function ExperimentForm({
         onSubmit({
             dataset_id: datasetId,
             name,
-            description:
-                description || undefined
+            description: description || undefined,
+            model,
+            target_column: targetColumn,
+            test_size: testSize,
+            random_seed: randomSeed
         });
     }
 
@@ -43,6 +68,8 @@ export default function ExperimentForm({
                 }
                 required
             />
+            <br/>
+
             <label>
                 Experiment Name
             </label>
@@ -53,6 +80,7 @@ export default function ExperimentForm({
                 }
                 required
             />
+            <br/>
             <label>
                 Description
             </label>
@@ -62,6 +90,70 @@ export default function ExperimentForm({
                     setDescription(e.target.value)
                 }
             />
+            <br/>
+            <label htmlFor="model">
+                Model
+            </label>
+            <select
+            id="model"
+            value={model}
+            onChange={(event) =>
+                setModel(event.target.value as ExperimentModel)
+            }
+            required>
+                {models.map((option) => (
+                    <option
+                    key={option.value}
+                    value={option.value}>
+                        {option.label}
+                    </option>
+                ))}
+            </select>
+            <br/>
+            <label htmlFor="target-column">
+                Target Column
+            </label>
+            <input
+            id="target-column"
+            type="text"
+            value={targetColumn}
+            onChange={(event) =>
+                setTargetColumn(event.target.value)
+            }
+            placeholder="e.g. Label"
+            required/>
+            <br/>
+            <label htmlFor="test-size">
+                    Test Size
+            </label>
+            <input
+            id="test-size"
+            type="number"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value={testSize}
+            onChange={(event) =>
+                setTestSize(Number(event.target.value))
+            }
+            required/>
+            <small>
+                Proportion of the dataset reserved for testing.
+            </small>
+            <br/>
+            <label htmlFor="random-seed">
+                Random Seed
+            </label>
+            <input
+            id="random-seed"
+            type="number"
+            value={randomSeed}
+            onChange={(event) =>
+                setRandomSeed(Number(event.target.value))
+            }
+            required
+            />
+            <br/>
             <button
                 type="submit"
                 disabled={loading}

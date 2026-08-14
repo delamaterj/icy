@@ -15,6 +15,8 @@ export default function ExperimentTable({experiments}: Props) {
                     <th>Name</th>
                     <th>Dataset ID</th>
                     <th>Status</th>
+                    <th>Model</th>
+                    <th>Created At</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +33,12 @@ export default function ExperimentTable({experiments}: Props) {
                             </td>
                             <td>
                                 {experiment.status}
+                            </td>
+                            <td>
+                                {experiment.model}
+                            </td>
+                            <td>
+                                {experiment.created_at}
                             </td>
                         </tr>
                     ))

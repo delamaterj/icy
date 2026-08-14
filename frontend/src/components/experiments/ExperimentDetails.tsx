@@ -32,20 +32,19 @@ export default function ExperimentDetails({experiment}: Props) {
                 {experiment.created_at}
             </p>
             <p>
-                Started:
+                Target Column:
                 {" "}
-                {
-                    experiment.started_at ??
-                    "Not started"
-                }
+                {experiment.target_column}
             </p>
             <p>
-                Completed:
+                Test Size:
                 {" "}
-                {
-                    experiment.completed_at ??
-                    "Not completed"
-                }
+                {experiment.test_size}
+            </p>
+            <p>
+                Random Seed:
+                {" "}
+                {experiment.random_seed}
             </p>
         </div>
     );
