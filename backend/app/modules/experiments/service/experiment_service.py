@@ -60,10 +60,12 @@ class ExperimentService:
             experiment = self.experiment_repository.create(experiment)
 
             return {
-                "experiment_id": str(experiment.id),
+                "id": str(experiment.id),
                 "dataset_id": str(dataset.id),
                 "name": experiment.name,
                 "status": experiment.status.value,
+                "model": experiment.model.value,
+                "created_at": experiment.created_at
             }
 
         except AppException:
