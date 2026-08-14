@@ -12,10 +12,14 @@ import UploadDatasetPage from "../pages/UploadDatasetPage";
 import ExperimentsPage from "../pages/ExperimentPage";
 import ExperimentDetailsPage from "../pages/ExperimentDetailsPage";
 import CreateExperimentPage from "../pages/CreateExperimentPage";
+import NavBar from "../components/layout/NavBar";
 
 export default function AppRouter() {
     return (
+
+        <>
         <BrowserRouter>
+            <NavBar />
             <Routes>
 
                 <Route
@@ -60,5 +64,6 @@ export default function AppRouter() {
 
             </Routes>
         </BrowserRouter>
+        </>
     );
 }
