@@ -21,7 +21,7 @@ class DatasetValidator:
         result: ValidationResult
     ):
         if not os.path.exists(file_path):
-            result.add_error("Dataset file does not exist.")
+            result.add_error("Dataset file does not exist")
 
     def _validate_supported_file(
         self,
@@ -32,7 +32,7 @@ class DatasetValidator:
             FileType.CSV
         }
         if file_type not in supported:
-            result.add_error(f"Dataset type: {file_type.value} is currently not supported for training")
+            result.add_error(f"Dataset type {file_type.value} is currently not supported for training")
 
     def _validate_not_empty(
         self,
@@ -41,10 +41,10 @@ class DatasetValidator:
     ):
 
         if metadata["row_count"] <= 0:
-            result.add_error("Dataset contains no rows.")
+            result.add_error("Dataset contains no rows")
 
         if metadata["column_count"] <= 0:
-            result.add_error("Dataset contains no columns.")
+            result.add_error("Dataset contains no columns")
 
     def _validate_required_columns(
         self,
