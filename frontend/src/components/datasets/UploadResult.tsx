@@ -31,7 +31,7 @@ export default function UploadResult({
         return (
             <div>
                 <h2>Dataset Uploaded Successfully</h2>
-                <p>View new dataset<Link to={`/datasets/${result.dataset_id}`}>here</Link></p>
+                <p>View new dataset <Link to={`/datasets/${result.dataset_id}`}> here</Link></p>
             </div>
         );
     }
