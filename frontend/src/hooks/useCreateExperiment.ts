@@ -29,6 +29,7 @@ export function useCreateExperiment() {
         } catch (err) {
 
             setError("Unable to create experiment.");
+            throw err;
 
         } finally {
 
