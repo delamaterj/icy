@@ -1,6 +1,4 @@
 import os
-import pandas as pd
-
 from app.enums.file_type import FileType
 from app.modules.datasets.validators.validation_result import ValidationResult
 
