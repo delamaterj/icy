@@ -54,7 +54,6 @@ export default function ExperimentForm({
             test_size: testSize,
             random_seed: randomSeed
         });
-        alert("Dataset has been submitted");
     }
 
     return (

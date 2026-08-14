@@ -1,4 +1,5 @@
 import type { UploadDatasetResponse } from "../../types/dataset";
+import { Link } from "react-router-dom";
 
 interface UploadResultProps {
     result: UploadDatasetResponse | null | undefined;
@@ -30,16 +31,14 @@ export default function UploadResult({
         return (
             <div>
                 <h2>Dataset Uploaded Successfully</h2>
-                <p>Status: {result.status}</p>
-                <p>Dataset ID: {result.dataset_id}</p>
+                <p>View new dataset <Link to={`/datasets/${result.dataset_id}`}> here</Link></p>
             </div>
         );
     }
 
     return (
         <div>
-            <h2>Dataset Uploaded, But Validation Failed</h2>
-            <p>Status: {result.status}</p>
+            <h2>Dataset Validation Failed</h2>
             <p>Validation Errors:</p>
             <ul>
                 {
@@ -48,7 +47,6 @@ export default function UploadResult({
                     ))
                 }
             </ul>
-            <p>Dataset ID: {result.dataset_id}</p>
         </div>
     );
 }
