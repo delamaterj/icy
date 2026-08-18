@@ -14,3 +14,7 @@ class TrainingRunRepository:
         db.session.commit()
 
         return training_run
+
+    def get_by_id(self, id):
+    
+        return TrainingRun.query.get(id)
