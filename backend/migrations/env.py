@@ -1,12 +1,10 @@
 from logging.config import fileConfig
-
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
 from alembic import context
-
 from app import create_app
 from app.extensions import db
+import app.models
 
 app = create_app()
 
