@@ -42,15 +42,6 @@ class DatasetLoader:
 
         label_encoder = LabelEncoder()
         y = label_encoder.fit_transform(y)
-        
-        labels = sorted(y.unique())
-
-        label_mapping = {
-            label: index
-            for index, label in enumerate(labels)
-        }
-
-        y = y.map(label_mapping)
 
         X_train, X_test, y_train, y_test = train_test_split(
             X,
