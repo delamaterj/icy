@@ -1,10 +1,8 @@
 import pandas as pd
-
 from sklearn.model_selection import train_test_split
-
+from sklearn.preprocessing import LabelEncoder
 from app.common.exceptions import ValidationException
 from app.modules.datasets.utils.dataset_parser import DatasetParser
-
 
 class DatasetLoader:
 
@@ -41,6 +39,9 @@ class DatasetLoader:
             raise ValidationException([
                 "Dataset contains non-numeric feature columns."
             ])
+
+        label_encoder = LabelEncoder()
+        y = label_encoder.fit_transform(y)
         
         labels = sorted(y.unique())
 
