@@ -35,7 +35,14 @@ class DatasetParser:
     @staticmethod
     def load_dataframe(file_path):
         try:
-            return pd.read_csv(file_path)
+            dataframe = pd.read_csv(file_path)
+
+            dataframe.columns = [
+                column.strip()
+                for column in dataframe.columns
+            ]
+
+            return dataframe
 
         except EmptyDataError:
             raise ValidationException([
