@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from app.common.exceptions import ValidationException
@@ -40,6 +41,20 @@ class DatasetLoader:
                 "Dataset contains non-numeric feature columns."
             ])
 
+        X = X.replace(
+            [np.inf, -np.inf],
+            np.nan
+        )
+        valid_rows = ~X.isna().any(axis=1)
+
+        X = X.loc[valid_rows]
+        y = y.loc[valid_rows]
+
+        if X.empty:
+            raise ValidationException([
+                "Dataset contains no valid rows after preprocessing."
+            ])
+
         label_encoder = LabelEncoder()
         y = label_encoder.fit_transform(y)
 
@@ -56,5 +71,5 @@ class DatasetLoader:
             "X_test": X_test,
             "y_train": y_train,
             "y_test": y_test,
-            "label_mapping": label_mapping
+            "label_encoder": label_encoder
         }
