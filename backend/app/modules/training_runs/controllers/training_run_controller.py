@@ -1,7 +1,5 @@
 from flask import jsonify
-from app.modules.training_runs.services.training_run_services import (
-    TrainingRunService
-)
+from app.modules.training_runs.services.training_run_services import TrainingRunService
 
 def serialize_training_run(run):
 

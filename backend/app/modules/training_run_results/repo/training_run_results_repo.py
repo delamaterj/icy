@@ -1,19 +1,14 @@
 from app.extensions import db
 from app.models.training_run_results import TrainingRunResult
-from app.models.training_run import TrainingRun
+
 
 class TrainingRunResultRepository:
 
     @staticmethod
-    def get_by_experiment_id(experiment_id):
-        return TrainingRun.query.filter_by(
-            experiment_id=experiment_id
-        ).all()
+    def get_by_training_run_id(training_run_id):
 
-    @staticmethod
-    def get_by_id(run_id):
-        return TrainingRun.query.filter_by(
-            id=run_id
+        return TrainingRunResult.query.filter_by(
+            training_run_id=training_run_id
         ).first()
 
     @staticmethod
