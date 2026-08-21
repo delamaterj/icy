@@ -48,3 +48,32 @@ class TrainingRunService:
             "status": training_run.status.value,
             "created_at": training_run.created_at.isoformat()
         }
+
+    def get_runs_by_experiment(self, experiment_id):
+
+        runs = self.training_run_repository.get_by_experiment_id(
+            experiment_id
+        )
+
+        return runs
+
+    def get_run(self, experiment_id, run_id):
+
+        run = self.training_run_repository.get_by_id(
+            run_id
+        )
+
+        if not run:
+            raise ValidationException("Training run not found.")
+
+        if run.experiment_id != experiment_id:
+            raise ValidationException("Training run not found.")
+
+        result = self.training_run_result_repository.get_by_training_run_id(
+            run.id
+        )
+
+        return {
+            "run": run,
+            "result": result
+        }

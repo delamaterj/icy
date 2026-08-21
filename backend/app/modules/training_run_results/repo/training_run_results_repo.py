@@ -1,7 +1,15 @@
 from app.extensions import db
 from app.models.training_run_results import TrainingRunResult
 
+
 class TrainingRunResultRepository:
+
+    @staticmethod
+    def get_by_training_run_id(training_run_id):
+
+        return TrainingRunResult.query.filter_by(
+            training_run_id=training_run_id
+        ).first()
 
     @staticmethod
     def create_result(

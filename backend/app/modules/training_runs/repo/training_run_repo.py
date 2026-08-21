@@ -15,6 +15,14 @@ class TrainingRunRepository:
 
         return training_run
 
-    def get_by_id(self, id):
-    
-        return TrainingRun.query.get(id)
+    def get_by_experiment_id(self, experiment_id):
+
+        return TrainingRun.query.filter_by(
+            experiment_id=experiment_id
+        ).all()
+
+    def get_by_id(self, run_id):
+
+        return TrainingRun.query.filter_by(
+            id=run_id
+        ).first()
