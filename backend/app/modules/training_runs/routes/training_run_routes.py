@@ -1,9 +1,20 @@
 from flask import Blueprint
 
-from app.modules.training_runs.controllers.training_run_controller import create_training_run_controller
+from app.modules.training_runs.controllers.training_run_controller import (
+    create_training_run_controller,
+    get_training_runs_controller,
+    get_training_run_controller)
 
 training_run_bp = Blueprint("training_run", __name__)
 
 @training_run_bp.post("/experiments/<uuid:experiment_id>/runs")
 def create_training_run(experiment_id):
     return create_training_run_controller(experiment_id)
+
+@training_run_bp.get("/experiments/<uuid:experiment_id>/runs")
+def get_training_runs(experiment_id):
+    return get_training_runs_controller(experiment_id)
+
+@training_run_bp.get("/experiments/<uuid:experiment_id>/runs/<uuid:training_run_id>")
+def get_training_run(experiment_id, training_run_id):
+    return get_training_run_controller(experiment_id, training_run_id)

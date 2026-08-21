@@ -60,3 +60,9 @@ class TrainingRun(db.Model):
         "Experiment",
         back_populates="training_runs"
     )
+
+    result = relationship(
+    "TrainingRunResult",
+    back_populates="training_run",
+    uselist=False
+)
