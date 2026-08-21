@@ -30,4 +30,31 @@ class DatasetParser:
         except UnicodeDecodeError:
             raise ValidationException([
                 "Dataset encoding is not supported."
-    ]       )
+            ])
+
+    @staticmethod
+    def load_dataframe(file_path):
+        try:
+            dataframe = pd.read_csv(file_path)
+
+            dataframe.columns = [
+                column.strip()
+                for column in dataframe.columns
+            ]
+
+            return dataframe
+
+        except EmptyDataError:
+            raise ValidationException([
+                "Dataset is empty."
+            ])
+
+        except ParserError:
+            raise ValidationException([
+                "Dataset could not be parsed."
+            ])
+
+        except UnicodeDecodeError:
+            raise ValidationException([
+                "Dataset encoding is not supported."
+            ])

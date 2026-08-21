@@ -72,3 +72,8 @@ class Experiment(db.Model):
         "Dataset",
         back_populates="experiments"
     )
+
+    training_runs = relationship(
+    "TrainingRun",
+    back_populates="experiment"
+    )
