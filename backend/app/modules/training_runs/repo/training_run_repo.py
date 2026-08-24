@@ -26,3 +26,31 @@ class TrainingRunRepository:
         return TrainingRun.query.filter_by(
             id=run_id
         ).first()
+
+    def update_status(self, run_id, status):
+
+        run = TrainingRun.query.filter_by(
+            id=run_id
+        ).first()
+
+        if not run:
+            return None
+
+        run.status = status
+        db.session.commit()
+
+        return run
+
+    def update_error_message(self, run_id, message):
+    
+            run = TrainingRun.query.filter_by(
+                id=run_id
+            ).first()
+    
+            if not run:
+                return None
+    
+            run.error_message = message
+            db.session.commit()
+    
+            return run
