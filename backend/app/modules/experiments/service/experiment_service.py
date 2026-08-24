@@ -41,10 +41,10 @@ class ExperimentService:
             if target_column not in columns: 
                 raise ValidationException([ f"Target column '{target_column}' " "does not exist in the selected dataset." ])
 
-            if dataset.status != DatasetStatus.READY:
+            '''if dataset.status != DatasetStatus.READY:
                 raise ValidationException(
                     ["Dataset must be READY before creating an experiment."]
-                )
+                )'''
 
             experiment = Experiment( 
                 dataset_id=dataset.id, 
@@ -68,7 +68,7 @@ class ExperimentService:
                 "created_at": experiment.created_at
             }
 
-        except AppException:
+        except AppException as e:
             raise
         except Exception as e:
             print(e)

@@ -61,7 +61,7 @@ DatasetDetailsProps) {
                 {dataset.uploaded_at}
             </p>
 
-            {dataset.status === "READY" && <Link to={`/experiments/create/${dataset.id}`}>Create experiment from this dataset</Link>}
+            <Link to={`/experiments/create/${dataset.id}`}>Create experiment from this dataset</Link>
         </>
     );
 }
