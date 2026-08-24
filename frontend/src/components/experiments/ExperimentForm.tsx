@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { CreateExperimentRequest, ExperimentModel } from "../../types/experiment";
+import { Link } from "react-router-dom";
 
 interface Props {
     initialDatasetId : string
@@ -32,7 +33,7 @@ export default function ExperimentForm({
     loading
 }: Props) {
 
-    const [datasetId, setDatasetId] = useState(initialDatasetId);
+    const datasetId = initialDatasetId;
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [model, setModel] = useState<ExperimentModel>("RANDOM_FOREST");
@@ -58,16 +59,9 @@ export default function ExperimentForm({
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Dataset ID
-            </label>
-            <input
-                value={datasetId}
-                onChange={(e) =>
-                    setDatasetId(e.target.value)
-                }
-                required
-            />
+            <Link to={`/datasets/${initialDatasetId}`} target="_blank" rel="noopener nofererrer">
+                Dataset
+            </Link>
             <br/>
 
             <label>
