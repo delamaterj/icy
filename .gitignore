@@ -243,5 +243,5 @@ dist-ssr
 *.sw?
 
 # Project Specific
-uploads/
+uploads/*
 *.ipynb
