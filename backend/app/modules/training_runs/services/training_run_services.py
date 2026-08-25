@@ -10,6 +10,7 @@ from app.modules.training_runs.utils.model_factory import ModelFactory
 from app.modules.training_runs.utils.model_trainer import ModelTrainer
 from app.modules.training_runs.utils.model_evaluator import ModelEvaluator
 from app.enums.training_run_status import TrainingRunStatus
+from datetime import datetime, timezone
 
 class TrainingRunService:
 
@@ -109,9 +110,17 @@ class TrainingRunService:
             ])
 
         try:
+
+            started_at = datetime.now(timezone.utc)
+
             self.training_run_repository.update_status(
                 training_run.id,
                 TrainingRunStatus.RUNNING
+            )
+
+            self.training_run_repository.update_started_at(
+                training_run.id,
+                started_at      
             )
         
             data = DatasetLoader.load_and_split(
@@ -146,6 +155,12 @@ class TrainingRunService:
                 recall=results["recall"],
                 f1_score=results["f1_score"],
                 confusion_matrix=results["confusion_matrix"]
+            )
+
+            completed_at = datetime.now(timezone.utc)
+            self.training_run_repository.update_completed_at(
+                training_run.id,
+                completed_at
             )
         
             self.training_run_repository.update_status(
