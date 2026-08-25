@@ -47,6 +47,14 @@ class TrainingRunService:
             experiment.id
         )
 
+        return {
+            "id": str(training_run.id),
+            "experiment_id": str(training_run.experiment_id),
+            "status": training_run.status.value,
+            "created_at": training_run.created_at.isoformat()
+        }
+        #ML code to populate results
+        '''
         try:
             self.training_run_repository.update_status(
                 training_run.id,
@@ -109,10 +117,11 @@ class TrainingRunService:
                 training_run.id,
                 str(e)
             )
+        '''
 
-        raise ValidationException([
+        '''raise ValidationException([
             "Training Run Failed."
-        ])
+        ])'''
         
     def get_runs_by_experiment(self, experiment_id):
 
