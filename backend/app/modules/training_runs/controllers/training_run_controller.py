@@ -37,13 +37,17 @@ def serialize_training_run_details(run):
             else None
         ),
         "created_at": run.created_at.isoformat(),
-        "result": {
-            "accuracy": run.result.accuracy,
-            "precision": run.result.precision,
-            "recall": run.result.recall,
-            "f1_score": run.result.f1_score,
-            "confusion_matrix": run.result.confusion_matrix
-        }
+        "result": (
+            {
+                "accuracy": run.result.accuracy,
+                "precision": run.result.precision,
+                "recall": run.result.recall,
+                "f1_score": run.result.f1_score,
+                "confusion_matrix": run.result.confusion_matrix
+            }
+            if run.result
+            else None
+        )
     }
 
 training_run_service = TrainingRunService()
@@ -66,10 +70,7 @@ def get_training_runs_controller(experiment_id):
         for run in runs
     ]), 200
 
-def get_training_run_controller(
-    experiment_id,
-    run_id
-):
+def get_training_run_controller(experiment_id, run_id):
 
     run = training_run_service.get_run(
         experiment_id,
@@ -79,3 +80,7 @@ def get_training_run_controller(
     return jsonify(
         serialize_training_run_details(run)
     ), 200
+
+def run_training_run_controller(run_id):
+    result = training_run_service.run_training_run(run_id)
+    return jsonify(result), 201
