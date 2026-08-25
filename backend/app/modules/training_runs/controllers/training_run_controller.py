@@ -37,13 +37,17 @@ def serialize_training_run_details(run):
             else None
         ),
         "created_at": run.created_at.isoformat(),
-        "result": {
-            "accuracy": run.result.accuracy,
-            "precision": run.result.precision,
-            "recall": run.result.recall,
-            "f1_score": run.result.f1_score,
-            "confusion_matrix": run.result.confusion_matrix
-        }
+        "result": (
+            {
+                "accuracy": run.result.accuracy,
+                "precision": run.result.precision,
+                "recall": run.result.recall,
+                "f1_score": run.result.f1_score,
+                "confusion_matrix": run.result.confusion_matrix
+            }
+            if run.result
+            else None
+        )
     }
 
 training_run_service = TrainingRunService()
