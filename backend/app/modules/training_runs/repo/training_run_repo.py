@@ -43,14 +43,38 @@ class TrainingRunRepository:
 
     def update_error_message(self, run_id, message):
     
-            run = TrainingRun.query.filter_by(
-                id=run_id
-            ).first()
+        run = TrainingRun.query.filter_by(
+            id=run_id
+        ).first()
     
-            if not run:
-                return None
+        if not run:
+            return None
     
-            run.error_message = message
-            db.session.commit()
+        run.error_message = message
+        db.session.commit()
     
-            return run
+        return run
+
+    def update_started_at(self, run_id, started_at):
+    
+        run = TrainingRun.query.filter_by(
+            id=run_id
+        ).first()
+    
+        if not run:
+            return None
+    
+        run.started_at = started_at
+        db.session.commit()
+
+    def update_completed_at(self, run_id, completed_at):
+        
+        run = TrainingRun.query.filter_by(
+            id=run_id
+        ).first()
+        
+        if not run:
+            return None
+        
+        run.completed_at = completed_at
+        db.session.commit()
