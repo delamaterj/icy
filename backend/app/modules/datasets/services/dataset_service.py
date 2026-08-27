@@ -60,10 +60,11 @@ class DatasetService:
 
             if validation.passed:
                 saved_dataset.status = DatasetStatus.READY
+                self.dataset_repository.update(saved_dataset)
             else:
                 saved_dataset.status = DatasetStatus.FAILED
-
-            self.dataset_repository.update(saved_dataset)
+                self.dataset_repository.update(saved_dataset)
+                FileStorage.delete(stored_file["file_path"])
 
             return {
                 "dataset_id": str(saved_dataset.id),
@@ -74,8 +75,7 @@ class DatasetService:
         
         except AppException:
             raise
-        except Exception as e:
-            print(e)
+        except Exception:
             raise AppException("Could not upload dataset.")
 
     def get_all_datasets(self):
