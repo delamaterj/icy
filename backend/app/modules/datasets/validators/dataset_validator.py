@@ -6,11 +6,7 @@ from app.modules.datasets.validators.validation_result import ValidationResult
 class DatasetValidator:
 
     REQUIRED_COLUMNS = {
-        "src_ip",
-        "dst_ip",
-        "protocol",
-        "packet_size",
-        "label"
+        "Label"
     }
 
     def _validate_file_exists(
