@@ -41,10 +41,10 @@ class ExperimentService:
             if target_column not in columns: 
                 raise ValidationException([ f"Target column '{target_column}' " "does not exist in the selected dataset." ])
 
-            if dataset.status != DatasetStatus.READY:
+            '''if dataset.status != DatasetStatus.READY:
                 raise ValidationException(
                     ["Dataset must be READY before creating an experiment."]
-                )
+                )'''
 
             experiment = Experiment( 
                 dataset_id=dataset.id, 
@@ -53,8 +53,8 @@ class ExperimentService:
                 status=ExperimentStatus.CREATED, 
                 model=data["model"], 
                 target_column=data["target_column"], 
-                test_size=data.get("test_size"), 
-                random_seed=data.get("random_seed") 
+                #test_size=data.get("test_size"), 
+                #random_seed=data.get("random_seed") 
             )
 
             experiment = self.experiment_repository.create(experiment)
@@ -70,8 +70,7 @@ class ExperimentService:
 
         except AppException:
             raise
-        except Exception as e:
-            print(e)
+        except Exception:
             raise AppException("Could not upload experiment.")
 
     def get_all_experiments(self):
@@ -102,8 +101,8 @@ class ExperimentService:
                     "status": experiment.status.value,
                     "created_at": experiment.created_at,
                     "target_column": experiment.target_column,
-                    "test_size": experiment.test_size,
-                    "random_seed": experiment.random_seed,
+                    #"test_size": experiment.test_size,
+                    #"random_seed": experiment.random_seed,
                 }
             
             except Exception as e:

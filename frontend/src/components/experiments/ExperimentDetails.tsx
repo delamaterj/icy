@@ -36,6 +36,7 @@ export default function ExperimentDetails({experiment}: Props) {
                 {" "}
                 {experiment.target_column}
             </p>
+            {/*
             <p>
                 Test Size:
                 {" "}
@@ -46,6 +47,7 @@ export default function ExperimentDetails({experiment}: Props) {
                 {" "}
                 {experiment.random_seed}
             </p>
+            */}
         </div>
     );
 

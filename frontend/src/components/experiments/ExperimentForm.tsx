@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { CreateExperimentRequest, ExperimentModel } from "../../types/experiment";
+import { Link } from "react-router-dom";
 
 interface Props {
     initialDatasetId : string
@@ -32,13 +33,11 @@ export default function ExperimentForm({
     loading
 }: Props) {
 
-    const [datasetId, setDatasetId] = useState(initialDatasetId);
+    const datasetId = initialDatasetId;
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [model, setModel] = useState<ExperimentModel>("RANDOM_FOREST");
     const [targetColumn, setTargetColumn] = useState("");
-    const [testSize, setTestSize] = useState(0.20);
-    const [randomSeed, setRandomSeed] = useState(42);
 
     function handleSubmit(
         event: React.FormEvent
@@ -51,23 +50,14 @@ export default function ExperimentForm({
             description: description || undefined,
             model,
             target_column: targetColumn,
-            test_size: testSize,
-            random_seed: randomSeed
         });
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Dataset ID
-            </label>
-            <input
-                value={datasetId}
-                onChange={(e) =>
-                    setDatasetId(e.target.value)
-                }
-                required
-            />
+            <Link to={`/datasets/${initialDatasetId}`} target="_blank" rel="noopener nofererrer">
+                Dataset
+            </Link>
             <br/>
 
             <label>
@@ -122,37 +112,6 @@ export default function ExperimentForm({
             }
             placeholder="e.g. Label"
             required/>
-            <br/>
-            <label htmlFor="test-size">
-                    Test Size
-            </label>
-            <input
-            id="test-size"
-            type="number"
-            min="0.01"
-            max="0.99"
-            step="0.01"
-            value={testSize}
-            onChange={(event) =>
-                setTestSize(Number(event.target.value))
-            }
-            required/>
-            <small>
-                Proportion of the dataset reserved for testing.
-            </small>
-            <br/>
-            <label htmlFor="random-seed">
-                Random Seed
-            </label>
-            <input
-            id="random-seed"
-            type="number"
-            value={randomSeed}
-            onChange={(event) =>
-                setRandomSeed(Number(event.target.value))
-            }
-            required
-            />
             <br/>
             <button
                 type="submit"

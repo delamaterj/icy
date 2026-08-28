@@ -241,3 +241,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Project Specific
+uploads/*
+*.ipynb
