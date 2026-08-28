@@ -52,8 +52,8 @@ export default function ExperimentForm({
             description: description || undefined,
             model,
             target_column: targetColumn,
-            test_size: testSize,
-            random_seed: randomSeed
+            //test_size: testSize,
+            //random_seed: randomSeed
         });
     }
 
