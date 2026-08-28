@@ -6,6 +6,8 @@ def serialize_training_run(run):
     return {
         "id": str(run.id),
         "experiment_id": str(run.experiment_id),
+        "test_size": run.test_size,
+        "random_seed": run.random_seed,
         "status": run.status.value,
         "started_at": (
             run.started_at.isoformat()
@@ -25,6 +27,8 @@ def serialize_training_run_details(run):
     return {
         "id": str(run.id),
         "experiment_id": str(run.experiment_id),
+        "test_size": run.test_size,
+        "random_seed": run.random_seed,
         "status": run.status.value,
         "started_at": (
             run.started_at.isoformat()
@@ -52,10 +56,10 @@ def serialize_training_run_details(run):
 
 training_run_service = TrainingRunService()
 
-def create_training_run_controller(experiment_id):
+def create_training_run_controller(experiment_id, data):
 
     response = training_run_service.create_training_run(
-        experiment_id
+        experiment_id, data
     )
     return jsonify(response), 201
 

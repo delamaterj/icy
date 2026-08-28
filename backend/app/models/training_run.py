@@ -6,7 +6,9 @@ from sqlalchemy import (
     DateTime,
     Enum as SQLEnum,
     ForeignKey,
-    Text
+    Text,
+    Float,
+    Integer
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.extensions import db
@@ -54,6 +56,18 @@ class TrainingRun(db.Model):
         DateTime(timezone=True),
         default=datetime.utcnow,
         nullable=False
+    )
+
+    test_size: Mapped[float] = mapped_column(
+        Float,
+        nullable=False,
+        default=0.20
+    )
+    
+    random_seed: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=42
     )
 
     experiment = relationship(

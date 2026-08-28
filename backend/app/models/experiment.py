@@ -56,18 +56,6 @@ class Experiment(db.Model):
         nullable=False
     )
 
-    test_size: Mapped[float] = mapped_column(
-        Float,
-        nullable=False,
-        default=0.20
-    )
-
-    random_seed: Mapped[int] = mapped_column(
-        Integer,
-        nullable=False,
-        default=42
-    )
-
     dataset = relationship(
         "Dataset",
         back_populates="experiments"

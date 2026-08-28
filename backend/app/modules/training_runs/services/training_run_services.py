@@ -11,6 +11,7 @@ from app.modules.training_runs.utils.model_trainer import ModelTrainer
 from app.modules.training_runs.utils.model_evaluator import ModelEvaluator
 from app.enums.training_run_status import TrainingRunStatus
 from datetime import datetime, timezone
+from app.modules.training_runs.utils.training_run_validator import TrainingRunValidator
 
 class TrainingRunService:
 
@@ -21,7 +22,7 @@ class TrainingRunService:
         self.training_run_result_repository = TrainingRunResultRepository()
 
 
-    def create_training_run(self, experiment_id):
+    def create_training_run(self, experiment_id, data):
 
         experiment = self.experiment_repository.get_by_id(
             experiment_id
@@ -39,13 +40,17 @@ class TrainingRunService:
                 "Experiment dataset not found."
             ])
 
-        '''if dataset.status != DatasetStatus.READY:
+        if dataset.status != DatasetStatus.READY:
             raise ValidationException([
                 "Experiment dataset must be READY."
-            ])'''
+            ])
+
+        errors = TrainingRunValidator.validate_training_run(data)
+        if errors:
+            raise ValidationException(errors)
 
         training_run = self.training_run_repository.create(
-            experiment.id
+            experiment.id, data
         )
 
         return {
@@ -126,13 +131,13 @@ class TrainingRunService:
             data = DatasetLoader.load_and_split(
                 file_path=dataset.file_path,
                 target_column=experiment.target_column,
-                test_size=experiment.test_size,
-                random_seed=experiment.random_seed
+                test_size=training_run.test_size,
+                random_seed=training_run.random_seed
             )
         
             model = ModelFactory.create(
                 experiment.model,
-                experiment.random_seed
+                training_run.random_seed
             )
         
             trained_model = ModelTrainer.train(

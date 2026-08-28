@@ -4,10 +4,14 @@ from app.models.training_run import TrainingRun
 
 class TrainingRunRepository:
 
-    def create(self, experiment_id):
+    def create(self, experiment_id, data):
+
+        print(data)
 
         training_run = TrainingRun(
-            experiment_id=experiment_id
+            experiment_id=experiment_id,
+            random_seed=data["random_seed"] if data["random_seed"] is not None else 42,
+            test_size=data["test_size"] if data["test_size"] is not None else 0.20
         )
 
         db.session.add(training_run)

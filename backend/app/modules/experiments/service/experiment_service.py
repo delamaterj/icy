@@ -53,8 +53,8 @@ class ExperimentService:
                 status=ExperimentStatus.CREATED, 
                 model=data["model"], 
                 target_column=data["target_column"], 
-                test_size=data.get("test_size"), 
-                random_seed=data.get("random_seed") 
+                #test_size=data.get("test_size"), 
+                #random_seed=data.get("random_seed") 
             )
 
             experiment = self.experiment_repository.create(experiment)
@@ -68,10 +68,9 @@ class ExperimentService:
                 "created_at": experiment.created_at
             }
 
-        except AppException as e:
+        except AppException:
             raise
-        except Exception as e:
-            print(e)
+        except Exception:
             raise AppException("Could not upload experiment.")
 
     def get_all_experiments(self):
@@ -102,8 +101,8 @@ class ExperimentService:
                     "status": experiment.status.value,
                     "created_at": experiment.created_at,
                     "target_column": experiment.target_column,
-                    "test_size": experiment.test_size,
-                    "random_seed": experiment.random_seed,
+                    #"test_size": experiment.test_size,
+                    #"random_seed": experiment.random_seed,
                 }
             
             except Exception as e:
