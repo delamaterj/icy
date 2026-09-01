@@ -26,9 +26,6 @@ export default function ExperimentDetailsPage() {
 
     return (
         <>
-            <h1>
-                Experiment Details
-            </h1>
             <TrainingRunResults
                 details={trainingRuns}
             />
