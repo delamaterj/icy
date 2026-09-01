@@ -15,8 +15,6 @@ export interface ExperimentSummary {
 export interface ExperimentDetails extends ExperimentSummary {
     description: string | null;
     target_column: string;
-    test_size: number;
-    random_seed: number;
 }
 
 export interface CreateExperimentRequest {
@@ -25,6 +23,4 @@ export interface CreateExperimentRequest {
     description?: string;
     model: ExperimentModel;
     target_column: string;
-    test_size?: number;
-    random_seed?: number;
 }
