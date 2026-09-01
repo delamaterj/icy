@@ -25,6 +25,7 @@ export default function TrainingRunsPage() {
             <h1>Training Runs</h1>
             <TrainingRunsTable
                 training_runs={trainingRuns}
+                experimentId={id ?? ""}
             />
         </>
     );

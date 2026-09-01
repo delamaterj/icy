@@ -26,3 +26,15 @@ export interface TrainingRunSummary {
 export interface TrainingRunDetails extends TrainingRunSummary {
     result: Results;
 }
+
+export interface CreateTrainingRunRequest {
+    test_size: number;
+    random_seed: number;
+}
+
+export interface CreateTrainingRunResponse {
+    id: string;
+    experiment_id: string;
+    status: TrainingRunStatus;
+    created_at: string;
+}

@@ -1,15 +1,20 @@
 import type { TrainingRunSummary } from "../../types/training_runs";
 import { Link } from "react-router-dom";
 import { formatDuration } from "../../utils/formateDuration";
+import { useState } from "react";
+import CreateTrainingRunForm from "./TrainingRunForm";
 
 interface Props {
     training_runs: TrainingRunSummary[];
+    experimentId: string;
 }
 
-export default function TrainingRunsTable({training_runs}: Props) {
+export default function TrainingRunsTable({training_runs, experimentId}: Props) {
+
+    const [showCreateForm, setShowCreateForm] = useState(false);
 
     return (
-
+        <>
         <table>
             <thead>
                 <tr>
@@ -51,5 +56,24 @@ export default function TrainingRunsTable({training_runs}: Props) {
                 }
             </tbody>
         </table>
+
+        {training_runs.length === 0 && (
+            <h2>No training runs yet</h2>
+        )}
+
+        <button
+        type="button"
+        onClick={() => setShowCreateForm(true)}>
+            + Add Training Run
+        </button>
+
+        {showCreateForm && (
+            <CreateTrainingRunForm
+            experimentId={experimentId}
+            onSuccess={() => {
+            setShowCreateForm(false);
+            }}/>
+        )}
+        </>
     );
 }
