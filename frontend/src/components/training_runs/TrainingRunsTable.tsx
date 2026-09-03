@@ -1,17 +1,29 @@
 import type { TrainingRunSummary } from "../../types/training_runs";
 import { Link } from "react-router-dom";
 import { formatDuration } from "../../utils/formateDuration";
-import { useState } from "react";
-import CreateTrainingRunForm from "./TrainingRunForm";
+import { useRunTrainingRun } from "../../hooks/useRunTrainingRun";
 
 interface Props {
     training_runs: TrainingRunSummary[];
     experimentId: string;
+    onRunSuccess: () => void;
 }
 
-export default function TrainingRunsTable({training_runs, experimentId}: Props) {
+export default function TrainingRunsTable({training_runs, onRunSuccess,}: Props) {
 
-    const [showCreateForm, setShowCreateForm] = useState(false);
+    const {
+        run,
+        loading: runLoading,
+        error: runError,
+    } = useRunTrainingRun();
+
+    const handleRunTrainingRun = async (trainingRunId: string) => {
+    const success = await run(trainingRunId);
+
+    if (success) {
+        onRunSuccess();
+    }
+};
 
     return (
         <>
@@ -23,6 +35,7 @@ export default function TrainingRunsTable({training_runs, experimentId}: Props) 
                     <th>Created At</th>
                     <th>Duration</th>
                     <th>Results</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -48,8 +61,24 @@ export default function TrainingRunsTable({training_runs, experimentId}: Props) 
                             </td>
                             <td>
                                 <Link to={`/experiments/${training_run.experiment_id}/runs/${training_run.id}`}>
-                                    Results
+                                    Details
                                 </Link>
+                            </td>
+                            <td>
+                                {training_run.status === "CREATED" && (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            handleRunTrainingRun(
+                                                training_run.id
+                                            )
+                                        }
+                                        disabled={runLoading}>
+                                            {runLoading
+                                                ? "RUNNING..."
+                                                : "RUN"}
+                                    </button>
+                                )}
                             </td>
                         </tr>
                     ))
@@ -57,23 +86,14 @@ export default function TrainingRunsTable({training_runs, experimentId}: Props) 
             </tbody>
         </table>
 
+        {runError && (
+                <p>{runError}</p>
+            )}
+            
         {training_runs.length === 0 && (
             <h2>No training runs yet</h2>
         )}
 
-        <button
-        type="button"
-        onClick={() => setShowCreateForm(true)}>
-            + Add Training Run
-        </button>
-
-        {showCreateForm && (
-            <CreateTrainingRunForm
-            experimentId={experimentId}
-            onSuccess={() => {
-            setShowCreateForm(false);
-            }}/>
-        )}
         </>
     );
 }
