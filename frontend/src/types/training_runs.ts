@@ -32,7 +32,7 @@ export interface CreateTrainingRunRequest {
     random_seed: number;
 }
 
-export interface CreateTrainingRunResponse {
+export interface TrainingRunResponse {
     id: string;
     experiment_id: string;
     status: TrainingRunStatus;
