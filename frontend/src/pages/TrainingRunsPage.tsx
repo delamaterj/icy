@@ -1,6 +1,8 @@
 import TrainingRunsTable from "../components/training_runs/TrainingRunsTable";
 import { useTrainingRuns } from "../hooks/useTrainingRuns";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
+import CreateTrainingRunForm from "../components/training_runs/TrainingRunForm";
 
 export default function TrainingRunsPage() {
 
@@ -9,8 +11,11 @@ export default function TrainingRunsPage() {
     const {
         trainingRuns,
         loading,
-        error
+        error,
+        refresh
     } = useTrainingRuns(id ?? "");
+
+    const [showCreateForm, setShowCreateForm] = useState(false);
 
     if (loading) {
         return <p>Loading training runs...</p>;
@@ -27,6 +32,19 @@ export default function TrainingRunsPage() {
                 training_runs={trainingRuns}
                 experimentId={id ?? ""}
             />
+            {showCreateForm && (
+            <CreateTrainingRunForm
+            experimentId={id ?? ""}
+            onSuccess={() => {
+            setShowCreateForm(false);
+            refresh();
+            }}/>
+        )}
+        <button
+        type="button"
+        onClick={() => setShowCreateForm(true)}>
+            + Add Training Run
+        </button>
         </>
     );
 }
