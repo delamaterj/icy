@@ -12,6 +12,7 @@ const generateRandomSeed = (): number => {
 
 export default function CreateTrainingRunForm({
     experimentId,
+    onSuccess,
 }: CreateTrainingRunFormProps) {
 
     const [testSize, setTestSize] = useState("0.2");
@@ -35,7 +36,9 @@ export default function CreateTrainingRunForm({
                     random_seed: Number(randomSeed)
                 }
             );
-            console.log(response)
+            if (response) {
+                onSuccess?.();
+            }
         }
         catch (err) {
             console.log(err);
@@ -43,6 +46,7 @@ export default function CreateTrainingRunForm({
     };
 
     return (
+
         <form onSubmit={handleSubmit}>
             
             <div>
@@ -98,9 +102,8 @@ export default function CreateTrainingRunForm({
             )}
 
             <button
-                type="submit"
-                disabled={loading}
-            >
+            type="submit"
+            disabled={loading}>
                 {loading ? "Creating..." : "Create Training Run"}
             </button>
 
