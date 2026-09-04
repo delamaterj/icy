@@ -13,6 +13,8 @@ import ExperimentsPage from "../pages/ExperimentPage";
 import ExperimentDetailsPage from "../pages/ExperimentDetailsPage";
 import CreateExperimentPage from "../pages/CreateExperimentPage";
 import NavBar from "../components/layout/NavBar";
+import TrainingRunsPage from "../pages/TrainingRunsPage";
+import TrainingRunResultsPage from "../pages/TrainingRunResultsPage";
 
 export default function AppRouter() {
     return (
@@ -60,6 +62,16 @@ export default function AppRouter() {
                 <Route
                     path="/experiments/create/:dataset_id"
                     element={<CreateExperimentPage />}
+                />
+
+                <Route
+                    path="experiments/:id/runs"
+                    element={<TrainingRunsPage />}
+                />
+
+                <Route
+                    path="experiments/:id/runs/:id2"
+                    element={<TrainingRunResultsPage />}
                 />
 
             </Routes>

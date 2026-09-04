@@ -36,18 +36,11 @@ export default function ExperimentDetails({experiment}: Props) {
                 {" "}
                 {experiment.target_column}
             </p>
-            {/*
             <p>
-                Test Size:
+                Training Runs:
                 {" "}
-                {experiment.test_size}
+                <Link to={`/experiments/${experiment.id}/runs`}>Training Runs</Link>
             </p>
-            <p>
-                Random Seed:
-                {" "}
-                {experiment.random_seed}
-            </p>
-            */}
         </div>
     );
 
