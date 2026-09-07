@@ -8,7 +8,7 @@ interface Props {
 export default function ExperimentTable({experiments}: Props) {
 
     return (
-
+        <div className="table-container">
         <table>
             <thead>
                 <tr>
@@ -45,5 +45,6 @@ export default function ExperimentTable({experiments}: Props) {
                 }
             </tbody>
         </table>
+        </div>
     );
 }

@@ -26,8 +26,12 @@ export default function TrainingRunsTable({training_runs, onRunSuccess,}: Props)
 };
 
     return (
-        <>
-        <table>
+        <div className="table-container">
+            {training_runs.length === 0 ? (
+            <h2>No training runs yet</h2>
+        ) : 
+            <>
+            <table>
             <thead>
                 <tr>
                     <th>Experiment</th>
@@ -89,11 +93,9 @@ export default function TrainingRunsTable({training_runs, onRunSuccess,}: Props)
         {runError && (
                 <p>{runError}</p>
             )}
-            
-        {training_runs.length === 0 && (
-            <h2>No training runs yet</h2>
-        )}
+            </>
+        }
 
-        </>
+        </div>
     );
 }

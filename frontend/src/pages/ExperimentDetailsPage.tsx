@@ -25,13 +25,9 @@ export default function ExperimentDetailsPage() {
     }
 
     return (
-        <>
-            <h1>
-                Experiment Details
-            </h1>
-            <ExperimentDetails
-                experiment={experiment}
-            />
-        </>
+        <div className="page-container">
+            <h1>Experiment Details</h1>
+            <ExperimentDetails experiment={experiment}/>
+        </div>
     );
 }

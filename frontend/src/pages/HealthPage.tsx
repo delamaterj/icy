@@ -15,12 +15,12 @@ export default function HealthPage() {
         return <p>{error}</p>;
 
     return (
-        <>
+        <div className="page-container">
             <h1>{health?.service}</h1>
             <p>Status: {health?.status}</p>
             <p>Version: {health?.version}</p>
             <p>{health?.timestamp}</p>
-        </>
+        </div>
     );
     
 }
