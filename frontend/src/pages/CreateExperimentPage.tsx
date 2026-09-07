@@ -29,10 +29,8 @@ export default function CreateExperimentPage() {
     }
 
     return (
-        <>
-            <h1>
-                Create Experiment
-            </h1>
+        <div className="page-container">
+            <h1>Create Experiment</h1>
             {
                 error &&
                 <p>{error}</p>
@@ -42,6 +40,6 @@ export default function CreateExperimentPage() {
                 onSubmit={handleCreate}
                 loading={loading}
             />
-        </>
+        </div>
     );
 }

@@ -17,11 +17,9 @@ export default function ExperimentsPage() {
     }
 
     return (
-        <>
+        <div className="page-container">
             <h1>Experiments</h1>
-            <ExperimentTable
-                experiments={experiments}
-            />
-        </>
+            <ExperimentTable experiments={experiments}/>
+        </div>
     );
 }

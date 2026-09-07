@@ -54,15 +54,17 @@ export default function ExperimentForm({
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <Link to={`/datasets/${initialDatasetId}`} target="_blank" rel="noopener nofererrer">
+        <div className="form-container">
+        <form onSubmit={handleSubmit} className="form-card">
+            
+            <div className="form-field">
+            <Link to={`/datasets/${initialDatasetId}`} target="_blank" rel="noopener noreferrer">
                 Dataset
             </Link>
-            <br/>
+            </div>
 
-            <label>
-                Experiment Name
-            </label>
+            <div className="form-field">
+            <label>Experiment Name</label>
             <input
                 value={name}
                 onChange={(e) =>
@@ -70,49 +72,52 @@ export default function ExperimentForm({
                 }
                 required
             />
-            <br/>
-            <label>
-                Description
-            </label>
+            </div>
+
+            <div className="form-field">
+            <label>Description</label>
             <textarea
                 value={description}
                 onChange={(e) =>
                     setDescription(e.target.value)
                 }
             />
-            <br/>
-            <label htmlFor="model">
-                Model
-            </label>
+            </div>
+
+            <div className="form-field">
+            <label htmlFor="model">Model</label>    
             <select
-            id="model"
-            value={model}
-            onChange={(event) =>
-                setModel(event.target.value as ExperimentModel)
-            }
-            required>
+                id="model"
+                value={model}
+                onChange={(event) =>
+                    setModel(event.target.value as ExperimentModel)
+                }
+                required
+            >
                 {models.map((option) => (
                     <option
-                    key={option.value}
-                    value={option.value}>
-                        {option.label}
+                        key={option.value}
+                        value={option.value}>
+                            {option.label}
                     </option>
                 ))}
             </select>
-            <br/>
-            <label htmlFor="target-column">
-                Target Column
-            </label>
+            </div>
+
+            <div className="form-field">
+            <label htmlFor="target-column">Target Column</label>
             <input
-            id="target-column"
-            type="text"
-            value={targetColumn}
-            onChange={(event) =>
-                setTargetColumn(event.target.value)
-            }
-            placeholder="e.g. Label"
-            required/>
-            <br/>
+                id="target-column"
+                type="text"
+                value={targetColumn}
+                onChange={(event) =>
+                    setTargetColumn(event.target.value)
+                }
+                placeholder="e.g. Label"
+                required
+            />
+            </div>
+
             <button
                 type="submit"
                 disabled={loading}
@@ -124,5 +129,6 @@ export default function ExperimentForm({
                 }
             </button>
         </form>
+        </div>
     );
 }
