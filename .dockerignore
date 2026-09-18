@@ -1,0 +1,62 @@
+# Git
+.git/
+.gitignore
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+.venv/
+venv/
+env/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Frontend build output
+frontend/dist/
+
+# Python build output
+*.egg-info/
+dist/
+build/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Local database / temporary files
+*.sqlite
+*.sqlite3
+
+# Docker
+docker-compose.override.yml
+
+# Documentation / project files not needed in images
+README.md

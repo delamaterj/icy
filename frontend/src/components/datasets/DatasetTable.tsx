@@ -8,7 +8,7 @@ interface DatasetTableProps {
 export default function DatasetTable({
     datasets}: DatasetTableProps) {
     return (
-        <>
+        <div className="table-container">
             <table>
                 <thead>
                     <tr>
@@ -28,6 +28,6 @@ export default function DatasetTable({
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }

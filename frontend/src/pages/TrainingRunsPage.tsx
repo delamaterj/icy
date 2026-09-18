@@ -26,11 +26,12 @@ export default function TrainingRunsPage() {
     }
 
     return (
-        <>
+        <div className="page-container">
             <h1>Training Runs</h1>
             <TrainingRunsTable
                 training_runs={trainingRuns}
                 experimentId={id ?? ""}
+                onRunSuccess={refresh}
             />
             {showCreateForm && (
             <CreateTrainingRunForm
@@ -45,6 +46,6 @@ export default function TrainingRunsPage() {
         onClick={() => setShowCreateForm(true)}>
             + Add Training Run
         </button>
-        </>
+        </div>
     );
 }

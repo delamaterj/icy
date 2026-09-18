@@ -11,57 +11,60 @@ DatasetDetailsProps) {
         <>
             <h2>Dataset Details</h2>
 
-            <p>
-                <strong>Original Filename:</strong>{" "}
-                {dataset.original_filename}
-            </p>
+            <div className="details-grid">
+            <div className="detail-item">
+                <strong>Original Filename: </strong>
+                <span>{dataset.original_filename}</span>
+            </div>
 
-            <p>
-                <strong>Stored Filename:</strong>{" "}
-                {dataset.stored_filename}
-            </p>
+            <div className="detail-item">
+                <strong>Stored Filename: </strong>
+                <span>{dataset.stored_filename}</span>
+            </div>
 
-            <p>
-                <strong>Status:</strong>{" "}
-                {dataset.status}
-            </p>
+            <div className="detail-item">
+                <strong>Status: </strong>
+                <span>{dataset.status}</span>
+            </div>
 
-            <p>
-                <strong>File Type:</strong>{" "}
-                {dataset.file_type}
-            </p>
+            <div className="detail-item">
+                <strong>File Type: </strong>
+                <span>{dataset.file_type}</span>
+            </div>
 
-            <p>
-                <strong>File Size:</strong>{" "}
-                {dataset.file_size_bytes}
-            </p>
+            <div className="detail-item">
+                <strong>File Size: </strong>
+                <span>{dataset.file_size_bytes}</span>
+            </div>
 
-            <p>
-                <strong>Rows:</strong>{" "}
-                {dataset.row_count ?? "Unknown"}
-            </p>
+            <div className="detail-item">
+                <strong>Rows: </strong>
+                <span>{dataset.row_count ?? "Unknown"}</span>
+            </div>
 
-            <p>
-                <strong>Columns:</strong>{" "}
-                {dataset.column_count ?? "Unknown"}
-            </p>
+            <div className="detail-item">
+                <strong>Columns: </strong>
+                <span>{dataset.column_count ?? "Unknown"}</span>
+            </div>
 
-            <p>
-                <strong>Checksum:</strong>{" "}
-                {dataset.checksum}
-            </p>
+            <div className="detail-item">
+                <strong>Checksum:  </strong>
+                <span>{dataset.checksum}</span>
+            </div>
 
-            <p>
-                <strong>Version:</strong>{" "}
-                {dataset.version}
-            </p>
+            <div className="detail-item">
+                <strong>Version: </strong>
+                <span>{dataset.version}</span>
+            </div>
 
-            <p>
-                <strong>Uploaded:</strong>{" "}
-                {dataset.uploaded_at}
-            </p>
+            <div className="detail-item">
+                <strong>Uploaded: </strong>
+                <span>{dataset.uploaded_at}</span>
+            </div>
+            </div>
 
-            {dataset.status === "READY" && <Link to={`/experiments/create/${dataset.id}`}>Create experiment from this dataset</Link>}
+            {dataset.status === "READY" 
+            && <Link to={`/experiments/create/${dataset.id}`}>Create experiment from this dataset</Link>}
 
         </>
     );

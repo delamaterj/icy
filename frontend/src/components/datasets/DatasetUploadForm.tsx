@@ -41,7 +41,8 @@ export default function DatasetUploadForm() {
 
 
     return (
-        <>
+        <div className="form-container">
+        <div className="form-card">
             <input
                 type="file"
                 onChange={handleFileChange}
@@ -61,6 +62,7 @@ export default function DatasetUploadForm() {
                 result={result}
                 error={error}
             />
-        </>
+        </div>
+        </div>
     );
 }

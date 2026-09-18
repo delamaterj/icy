@@ -8,40 +8,47 @@ interface Props {
 export default function ExperimentDetails({experiment}: Props) {
 
     return (
-        <div>
-            <h2>
-                {experiment.name}
-            </h2>
-            <p>
+        <>
+            <h2>{experiment.name}</h2>
+
+            <div className="details-grid">
+
+            <div className="detail-item">
                 <Link to={`/datasets/${experiment.dataset_id}`}>Dataset</Link>
-            </p>
-            <p>
-                Status: {experiment.status}
-            </p>
-            <p>
-                Description:
-                {" "}
+            </div>
+
+            <div className="detail-item">
+                <strong>Status: </strong> 
+                <span>{experiment.status}</span>
+            </div>
+
+            <div className="detail-item">
+                <strong>Description: </strong>
+                <span>
                 {
                     experiment.description ??
                     "No description provided."
                 }
-            </p>
-            <p>
-                Created:
-                {" "}
-                {experiment.created_at}
-            </p>
-            <p>
-                Target Column:
-                {" "}
-                {experiment.target_column}
-            </p>
-            <p>
-                Training Runs:
-                {" "}
-                <Link to={`/experiments/${experiment.id}/runs`}>Training Runs</Link>
-            </p>
-        </div>
+                </span>
+            </div>
+
+            <div className="detail-item">
+                <strong>Created: </strong>
+                <span>{experiment.created_at}</span>
+            </div>
+
+            <div className="detail-item">
+                <strong>Target Column: </strong>
+                <span>{experiment.target_column}</span>
+            </div>
+
+            <div className="detail-item">
+                <strong>Training Runs: </strong>
+                <span><Link to={`/experiments/${experiment.id}/runs`}>Training Runs</Link></span>
+            </div>
+
+            </div>
+        </>
     );
 
 }

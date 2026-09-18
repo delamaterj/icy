@@ -47,9 +47,12 @@ export default function CreateTrainingRunForm({
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <div className="form-container">
+
+        <form onSubmit={handleSubmit} className="form-card">
             
-            <div>
+            <div className="form-field">
+
                 <label htmlFor="test-size">
                     Test Size
                 </label>
@@ -66,13 +69,9 @@ export default function CreateTrainingRunForm({
                     }
                     required
                 />
-
-                <small>
-                    Proportion of the dataset used for testing.
-                </small>
             </div>
 
-            <div>
+            <div className="form-field">
                 <label htmlFor="random-seed">
                     Random Seed
                 </label>
@@ -108,5 +107,6 @@ export default function CreateTrainingRunForm({
             </button>
 
         </form>
+        </div>
     );
 }

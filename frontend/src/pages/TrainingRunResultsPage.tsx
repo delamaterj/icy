@@ -25,10 +25,8 @@ export default function ExperimentDetailsPage() {
     }
 
     return (
-        <>
-            <TrainingRunResults
-                details={trainingRuns}
-            />
-        </>
+        <div className="page-container">
+            <TrainingRunResults details={trainingRuns}/>
+        </div>
     );
 }

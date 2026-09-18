@@ -29,12 +29,9 @@ export default function DatasetDetailsPage() {
 
 
     return (
-        <>
+        <div className="page-container">
             <h1>Dataset Details</h1>
-
-            <DatasetDetails
-                dataset={dataset}
-            />
-        </>
+            <DatasetDetails dataset={dataset}/>
+        </div>
     );
 }
