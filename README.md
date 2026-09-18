@@ -90,6 +90,41 @@ At the completion of Milestone 1, users can:
 7. View training run summaries and detailed information
 8. Store and view the results produced by training runs
 
+### Running Locally with Docker
+
+ICY uses Docker Compose to provide a consistent development environment
+for the frontend, backend, and PostgreSQL database.
+
+#### Initial Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/delamaterj/icy.git
+cd ICY
+```
+
+2. Create the environment file:
+
+```bash
+cp .env.example .env
+```
+
+Review the environment variables in .env and update any values
+required for your local environment.
+
+4. In Docker, build and start the application:
+
+```bash
+docker compose up --build
+```
+
+Once the containers are running, open:
+
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000
+- Backend health check: http://localhost:5000/health
+
 The current implementation establishes the foundation for future
 machine-learning experimentation, model comparison, and research
 workflows.
