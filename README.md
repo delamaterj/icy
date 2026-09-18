@@ -4,7 +4,7 @@ ICY is a machine-learning experimentation platform designed to
 manage datasets, configure experiments, execute training runs,
 and evaluate machine-learning models.
 
-## Milestone 1 (9/7/2026)
+## Milestone 1 (9/18/2026)
 
 ICY currently provides an end-to-end workflow for managing datasets,
 experiments, and training runs.
@@ -101,7 +101,7 @@ for the frontend, backend, and PostgreSQL database.
 
 ```bash
 git clone https://github.com/delamaterj/icy.git
-cd ICY
+cd icy
 ```
 
 2. Create the environment file:
@@ -113,7 +113,7 @@ cp .env.example .env
 Review the environment variables in .env and update any values
 required for your local environment.
 
-4. In Docker, build and start the application:
+3. In Docker, build and start the application:
 
 ```bash
 docker compose up --build
